@@ -13,6 +13,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&family=Nunito:wght@400;600;700&display=swap"
         rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -37,9 +40,9 @@
                 <label class="input-group-text" for="inputGroupSelect01">Select Difficulty</label>
                 <select class="form-select" id="inputGroupSelect01">
                     <option selected>Choose...</option>
-                    <option value="1">Easy</option>
-                    <option value="2">Medium</option>
-                    <option value="3">Hard</option>
+                    <option class="textlevel" id="easy" value="1">Easy</option>
+                    <option class="textlevel" id="medium" value="2">Medium</option>
+                    <option class="textlevel" id="hard" value="3">Hard</option>
                 </select>
             </div>
             <div class="mb-3">
@@ -53,9 +56,9 @@
                 <textarea class="form-control" id="typingArea" rows="3"></textarea>
             </div>
             <div class="mb-3 d-flex gap-4 btn-group btn-group-lg justify-content-center">
-                <button class="btn btn-outline-warning" id="startBtn">Start</button>
-                <button class="btn btn-outline-warning" id="stopBtn">Stop</button>
-                <button class="btn btn-outline-warning" id="retryBtn">Retry</button>
+                <button class="btn btn-outline-warning" id="start" data-action="start">Start</button>
+                <button class="btn btn-outline-warning" id="stop" data-action="stop">Stop</button>
+                <button class="btn btn-outline-warning" id="retry" data-action="retry">Retry</button>
             </div>
         </section>
             <section id="resultsSection" class="col-12 col-md-3 mx-auto">
