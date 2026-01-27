@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+header {
+    background-color: #ff8400;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+h1 {
+    font-family: 'Alegreya', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    width:100%;
+   
+}
+
+.instructions-btn {
+      
+   
+    background-color: white;
+    color:black;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    
+}
+
+.instructions-btn:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+.modal {
+    display: none;
+    width: 100%;
+    background-color: white;
+    border-top: 3px solid #ff8400;
+    border-bottom: 1px solid #e0e0e0;
+    z-index: 100;
+}
+
+.modal.show {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+}
+
+.close:hover,
+.close:focus {
+    color: #ff8400;
+    outline: none;
+}
+
+.modal-content h2 {
+    font-family: 'Alegreya', serif;
+    color: #ff8400;
+    margin-bottom: 1rem;
+}
+
+.modal-content p {
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+main {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #f9f9f9;
+}
+.btn-group .btn {
+    min-width: 100px;
+    color: black;
+    border-color: #ff8400;
+    border-width: 2px;
+}
+
+#resultsSection {
+    text-align: center;
+    border-style: groove;
+    border-width: 2px;
+    border-color: #ff8400;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+
+
