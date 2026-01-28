@@ -1,73 +1,49 @@
-let btns = document.querySelectorAll('.btn-group .btn');
+document.addEventListener('DOMContentLoaded', function () {
 
-for (let btn of btns) {
-    btn.addEventListener('click', function () {
+ const easyTexts = [
+        "The cat sat on the mat.",
+        "A quick brown fox jumps over the lazy dog.",
+        "She sells seashells by the seashore."
+    ];
 
-        if (this.getAttribute("data-action") === "start") {
-            measureSpeed(start);
-        } else {
-            let typingAction = this.getAttribute("data-action");
-            measureSpeed(typingAction);
+    const mediumTexts = [
+        "To be or not to be, that is the question.",
+        "All that glitters is not gold.",
+        "A journey of a thousand miles begins with a single step."
+    ];
+
+    const hardTexts = [
+        "It was the best of times, it was the worst of times.",
+        "In the beginning God created the heavens and the earth.",
+        "The only thing we have to fear is fear itself."
+    ];
+
+    const difficultySelect = document.getElementById('difficulty');
+    const sampleTextDiv = document.getElementById('sample-text');
+
+    function getRandomText(textArray) {
+        const randomIndex = Math.floor(Math.random() * textArray.length);
+        return textArray[randomIndex];
+    }
+
+    function updateSampleText() {
+        let selectedDifficulty = difficultySelect.value;
+        let selectedText;
+
+        if (selectedDifficulty === '1') {
+            selectedText = getRandomText(easyTexts);
+        } else if (selectedDifficulty === '2') {
+            selectedText = getRandomText(mediumTexts);
+        } else if (selectedDifficulty === '3') {
+            selectedText = getRandomText(hardTexts);
         }
-    });
-};
 
-
-function measureSpeed(action) {
-    const typingArea = document.getElementById('typingArea');
-    const textToType = document.getElementById('textToType').innerText;
-
-    if (action === 'start') {
-        typingArea.focus()
-        returnResults(action);
-     }
-    else if (action === 'stop') { returnResults(action); }
-    else if (action === 'retry') {
-        returnResults(action)
-        typingArea.value = '';
-        typingArea.focus();
+        sampleTextDiv.textContent = selectedText;
     }
+
+    difficultySelect.addEventListener('change', updateSampleText);
+
+    // Initialize with a random text from the default difficulty level
+    updateSampleText();
+
 }
-// Global variable to store start time AI Suggestion
-
-// and end time AI suggestion
-
-
-// set text to type content N.B. new to me - with async function
-async function setTextToType() {
-    const textToTypeElement = document.getElementById('textToType');
-    let levelText = document.getElementById('textlevel').value;
-    let sentences = 0;
-    if (levelText === 'easy') {
-        sentences = 5;
-}
-    else if (levelText === 'medium') {
-        sentences = 10;
-    }
-    else if (levelText === 'hard') {
-        sentences = 15;
-    }
-    try {
-        const response = await fetch(`https://api.api-ninjas.com/v1/loremipsum?sentences=${sentences}`);
-        const data = await response.json();
-        textToTypeElement.value = data.text;
-    } catch (error) {
-        console.error('Error fetching Lorem Ipsum:', error);
-        textToTypeElement.value = 'Error loading text. Please try again.';
-    }
-}
-// 
-// Function to calculate and return results - needs to count the letters typed, monitor the time taken, and calculate WPM
-function returnResults() {
-    if (action === 'start'|| action === 'retry') {
-        typingArea.value = '';
-        startTime = new Date().getTime();
-    } else if (action === 'stop') {
-    
-
-    let typedText = typingArea.value;
-    let endTime = new Date().getTime();
-    let timeTaken = (endTime - startTime) / 1000 / 60; // time in minutes}
-    let wordsTyped = typedText.split(' ').length;
-    let wpm = Math.round(wordsTyped / timeTaken);   
-    }}

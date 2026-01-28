@@ -20,9 +20,11 @@
 </head>
 
 <body>
-    <header>
-        <h1 >TypeRacer</h1>
-        <button class="instructions-btn " id="instructionsBtn">Instructions</button>
+    <header class="container">
+        <h1 class="col-12">TypeRacer</h1>
+        <div class="col-12">
+        <button class="instructions-btn" id="instructionsBtn">Instructions</button>
+            </div>
     </header>
 
     <!-- Modal -->
@@ -40,15 +42,15 @@
                 <label class="input-group-text" for="inputGroupSelect01">Select Difficulty</label>
                 <select class="form-select" id="inputGroupSelect01">
                     <option selected>Choose...</option>
-                    <option class="textlevel" id="easy" value="1">Easy</option>
-                    <option class="textlevel" id="medium" value="2">Medium</option>
-                    <option class="textlevel" id="hard" value="3">Hard</option>
+                    <option class="textlevel" id="difficulty" value="1">Easy</option>
+                    <option class="textlevel" id="difficulty" value="2">Medium</option>
+                    <option class="textlevel" id="difficulty" value="3">Hard</option>
                 </select>
             </div>
             <div class="mb-3">
-                <label for="textToType" class="form-label">Test your typing speed by typing the text shown
+                <label for="sample-text" class="form-label">Test your typing speed by typing the text shown
                     below:</label>
-                <textarea class="form-control" id="textToType" rows="3" readonly></textarea>
+                <textarea class="form-control" id="sample-text" rows="3" readonly></textarea>
             </div>
 
             <div class="mb-3">
@@ -63,8 +65,8 @@
         </section>
             <section id="resultsSection" class="col-12 col-md-3 mx-auto">
                 <h3>Results</h3>
-                <p id="level">Level:</p>
-                <p id="time">Time: <span class="time"></span></p>
+                <p id="level">Level: <span class="level"></span></p>
+                <p id="time">Time: <span class="time"></span>s</p>
                 <p id="wpmResult">WPM: <span class="wpmResult"></span></p>
             </section>
     </main>
