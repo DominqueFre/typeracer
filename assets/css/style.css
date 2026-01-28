@@ -142,5 +142,18 @@ main {
     border-radius: 10px;
 }
 
+.word-correct {
+    color: blue;
+}
+
+.word-incorrect {
+    color: red;
+}
+
+#sample-text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
 
 
