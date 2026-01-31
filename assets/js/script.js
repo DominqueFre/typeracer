@@ -1,3 +1,5 @@
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
 // Sample texts organized by difficulty level
 const sampleTexts = {
     1: [ // Easy
@@ -37,6 +39,7 @@ function updateSampleText() {
     const newText = getRandomSampleText(selectedDifficulty);
     originalSampleText = newText;
     sampleTextarea.textContent = newText;
+    typingArea.focus();
 }
 
 // Function to highlight words in sample text based on user input
@@ -75,7 +78,6 @@ let endTime = 0;
 let timerInterval = null;
 
 // Get button and result elements
-const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
 const retryButton = document.getElementById('retry');
 const typingArea = document.getElementById('typingArea');
@@ -87,15 +89,6 @@ function startTest() {
     // Record start time
     startTime = Date.now();
     
-    // Enable typing area and clear it
-    typingArea.disabled = false;
-    typingArea.value = '';
-    typingArea.focus();
-    
-    // Update button states
-    startButton.disabled = true;
-    stopButton.disabled = false;
-    
     // Start live timer display
     timerInterval = setInterval(updateLiveTimer, 100);
     
@@ -106,6 +99,9 @@ function startTest() {
     
     // Add real-time word checking
     typingArea.addEventListener('input', highlightWords);
+    
+    // Disable difficulty selector during test
+    difficultySelect.disabled = true;
 }
 
 // Function to update the live timer while typing
@@ -188,8 +184,10 @@ function stopTest() {
     // Remove input event listener
     typingArea.removeEventListener('input', highlightWords);
     
-    // Update button states
-    stopButton.disabled = true;
+    // Re-enable difficulty selector after test ends
+    difficultySelect.disabled = false;
+    
+    // Update button state
     retryButton.disabled = false;
 }
 
@@ -200,6 +198,9 @@ function retryTest() {
     endTime = 0;
     clearInterval(timerInterval);
     
+    // Reset test started flag
+    testStarted = false;
+    
     // Reset displays
     timeDisplay.textContent = '';
     levelDisplay.textContent = '';
@@ -207,14 +208,15 @@ function retryTest() {
     
     // Clear typing area
     typingArea.value = '';
-    typingArea.disabled = true;
-    
+    typingArea.disabled = false;
+    typingArea.focus();
     // Remove input event listener if it exists
     typingArea.removeEventListener('input', highlightWords);
     
-    // Reset button states
-    startButton.disabled = false;
-    stopButton.disabled = true;
+    // Re-enable difficulty selector on retry
+    difficultySelect.disabled = false;
+    
+    // Reset button state
     retryButton.disabled = false;
     
     // Get new sample text
@@ -223,26 +225,47 @@ function retryTest() {
 
 // Function to initialize the test on page load
 function initializeTest() {
-    // Disable typing area initially
-    typingArea.disabled = true;
-    stopButton.disabled = true;
-    
+    // Enable typing area from the start
+    typingArea.disabled = false;
+    typingArea.focus();
     // Clear results
     timeDisplay.textContent = '';
     levelDisplay.textContent = '';
+    
+    // Load initial sample text
+    updateSampleText();
 }
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    updateSampleText();
-    initializeTest();
-});
+// New: Flag to track if test has started
+let testStarted = false;
 
-// Add event listeners to buttons
-startButton.addEventListener('click', startTest);
-stopButton.addEventListener('click', stopTest);
+// Handler for Enter key press to end test (MOVED BEFORE IT'S USED)
+function handleEnterKey(event) {
+    if (event.key === 'Enter' && testStarted) {
+        event.preventDefault(); // Prevent newline in textarea
+        stopTest();
+    }
+}
+
+// New: Handler for first keypress to start test
+function handleFirstInput() {
+    if (!testStarted && typingArea.value.length > 0) {
+        testStarted = true;
+        startTest();
+    }
+}
+
+// Add event listener for typing area to auto-start
+typingArea.addEventListener('input', handleFirstInput);
+
+// Add event listener for Enter key to end test
+typingArea.addEventListener('keydown', handleEnterKey);
+
+// Initialize the test on page load
+initializeTest();
 retryButton.addEventListener('click', retryTest);
 
 // Event listener for difficulty selection change
 difficultySelect.addEventListener('change', updateSampleText);
 
+});

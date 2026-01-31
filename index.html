@@ -33,7 +33,19 @@
             <span class="close">&times;</span>
             <h2>Instructions</h2>
             <p>Welcome to TypeRacer! Here you can practice and improve your typing skills.</p>
-        </div>
+        <ol>
+            <li>Select a difficulty level from Easy, Medium, or Hard.</li>
+            <li>The test will start as soon as you begin typing.</li>
+            <li>Type the text shown in the box as quickly and accurately as possible.</li>
+            <li>Press Enter to finish the test and see your results.</li>
+            <li>Click Retry to try again with a new text.</li>
+        </ol>
+        <p>Good luck and have fun!</p>
+        <br>
+        <div class="modal-footer">
+        <button class="btn btn-secondary close1" type="button" data-bs-dismiss="modal">Close</button>    
+            </div>
+    </div>
     </div>
 
     <main class="container-fluid row">
@@ -53,12 +65,10 @@
             </div>
 
             <div class="mb-3">
-                <label for="typingArea" class="form-label">Click the start button to complete the test</label>
+                <label for="typingArea" class="form-label">Start typing to begin the test. Press Enter to finish.</label>
                 <textarea class="form-control " id="typingArea" rows="3"></textarea>
             </div>
             <div class="mb-3 d-flex gap-4 btn-group btn-group-lg justify-content-center">
-                <button class="btn btn-outline-warning" id="start" data-action="start">Start</button>
-                <button class="btn btn-outline-warning" id="stop" data-action="stop">Stop</button>
                 <button class="btn btn-outline-warning" id="retry" data-action="retry">Retry</button>
             </div>
         </section>
@@ -80,6 +90,7 @@
         const modal = document.getElementById('instructionsModal');
         const btn = document.getElementById('instructionsBtn');
         const closeBtn = document.getElementsByClassName('close')[0];
+        const closeBtn1 = document.getElementsByClassName('close1')[0];
 
         // Open modal
         btn.onclick = function () {
@@ -88,6 +99,11 @@
 
         // Close modal when clicking X
         closeBtn.onclick = function () {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking Close button in footer
+        closeBtn1.onclick = function () {
             modal.style.display = 'none';
         }
 
